@@ -13,6 +13,11 @@ const server = http.createServer(function (req, res) {
       res.write(page);
       res.end();
     }
+  } else if (req.method === "POST") {
+    console.log("in POST");
+    if (req.url === "/form") {
+      console.log("in POST in formURL");
+    }
   }
 })
 
