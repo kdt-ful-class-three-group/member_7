@@ -17,6 +17,10 @@ const server = http.createServer(function (req, res) {
     console.log("in POST");
     if (req.url === "/form") {
       console.log("in POST in formURL");
+      const page = fs.readFileSync("./index.html");
+      res.writeHead(200, { "Content-type": "utf-8; text/html" });
+      res.write(page);
+      res.end();
     }
   }
 })
