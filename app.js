@@ -1,5 +1,6 @@
 import http from "http";
 import fs from "fs";
+import qs from "querystring";
 
 const port = 3000;
 
@@ -17,10 +18,13 @@ const server = http.createServer(function (req, res) {
     console.log("in POST");
     if (req.url === "/form") {
       console.log("in POST in formURL");
-      const page = fs.readFileSync("./index.html");
-      res.writeHead(200, { "Content-type": "utf-8; text/html" });
-      res.write(page);
-      res.end();
+      req.on('data', (data) => {
+        const dataString = data.toString();
+        fs.writeFileSync("data.qs", dataString);
+        const dataObj = fs.readFileSync("data.qs");
+        console.log(qs.parse(dataObj.toString()));
+        res.end();
+      });
     }
   }
 })
