@@ -1,6 +1,6 @@
 import http from "http";
 import fs from "fs";
-import qs from "querystring";
+import { createFile } from "./createFile.js";
 
 const port = 3000;
 
@@ -19,9 +19,7 @@ const server = http.createServer(function (req, res) {
     if (req.url === "/form") {
       console.log("in POST in formURL");
       req.on('data', (data) => {
-        const qsObj = qs.parse(data.toString());
-        const dataJson = JSON.stringify(qsObj);
-        fs.writeFileSync("data.JSON", dataJson);
+        createFile(data);
       });
       res.on('end', () => {
         const jsonFile = fs.readFileSync("data.JSON").toString();
