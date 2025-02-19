@@ -1,6 +1,7 @@
 import http from "http";
 import fs from "fs";
 import { createFile } from "./createFile.js";
+import { fsReadFile } from "./fsReadFile.js";
 
 const port = 3000;
 
@@ -21,9 +22,9 @@ const server = http.createServer(function (req, res) {
       req.on('data', (data) => {
         createFile(data);
       });
-      res.on('end', () => {
-        const jsonFile = fs.readFileSync("data.JSON").toString();
-        res.write(jsonFile);
+      req.on('end', () => {
+        const data = fsReadFile();
+        console.log(data);
       })
       res.end();
     }
