@@ -1,6 +1,6 @@
 import http from "http";
 import fs from "fs";
-import { createFile } from "./createFile";
+import { createFile } from "./createFile.js";
 
 const port = 3000;
 
