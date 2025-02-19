@@ -4,6 +4,7 @@ import fs from "fs";
 import qs from "querystring";
 
 function createFile(data) {
+  console.log(fs.existsSync('data.JSON'));
   //* 사용자가 입력한 데이터 (ex: name=윤종환&address=대전) 받아오지만 해당 데이터는 버퍼형식이기 때문에 이를 문자열로 변환한다.
   const dataString = data.toString();
   //* 바뀐 데이터를 객체화 시킨다.

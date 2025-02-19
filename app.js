@@ -16,9 +16,11 @@ const server = http.createServer(function (req, res) {
   } else if (req.method === "POST") {
     if (req.url === "/form") {
       req.on('data', (data) => {
+        //* 파일 생성
         createFile(data);
       });
       req.on('end', () => {
+        //* 파일을 읽어온다.
         const data = fsReadFile();
         res.writeHead(200, { "Content-type": "utf-8; text/html" });
         res.write(JSON.stringify(data, null, 2));
