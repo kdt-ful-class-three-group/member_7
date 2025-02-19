@@ -19,9 +19,15 @@ const server = http.createServer(function (req, res) {
     if (req.url === "/form") {
       console.log("in POST in formURL");
       req.on('data', (data) => {
-        const dataString = JSON.stringify(data.toString());
-        console.log(dataString);
+        const qsObj = qs.parse(data.toString());
+        const dataJson = JSON.stringify(qsObj);
+        fs.writeFileSync("data.JSON", dataJson);
       });
+      res.on('end', () => {
+        const jsonFile = fs.readFileSync("data.JSON").toString();
+        res.write(jsonFile);
+      })
+      res.end();
     }
   }
 })
